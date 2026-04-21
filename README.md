@@ -1,6 +1,6 @@
 # HiveCTF
 
-An AWS cloud security Capture the Flag (CTF) platform with 5 cloud challenges and 3 non-cloud challenges (binary exploitation, cryptography, forensics). All cloud infrastructure is defined as Terraform and deploys to real AWS accounts. Non-cloud challenges run as Docker containers or are distributed as standalone files.
+An AWS cloud security Capture the Flag (CTF) platform with 5 challenges. All infrastructure is defined as Terraform and deploys to real AWS accounts.
 
 Created by Dakota State University students for the HiveCTF 2026 competition.
 
@@ -13,9 +13,6 @@ Created by Dakota State University students for the HiveCTF 2026 competition.
 | 3 | Bee's Knees | Cloud | Medium | Lambda, API Gateway, S3, KMS |
 | 4 | Hive Mind | Cloud | Medium-Hard | Cognito, DynamoDB, S3 |
 | 5 | Queen's Gambit | Cloud | Hard | IAM, STS, Lambda, SSM, Secrets Manager (cross-account) |
-| 6 | WOM | Binary Exploitation | Hard | -- |
-| 7 | The Enigma of Annabelle | Cryptography | Medium | -- |
-| 8 | Slice | Forensics | Medium | -- |
 
 **Flag format**: `HiveCTF{...}`
 
@@ -25,7 +22,6 @@ Created by Dakota State University students for the HiveCTF 2026 competition.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) v2
 - 2 AWS accounts with admin IAM users (see [docs/AWS_SETUP.md](docs/AWS_SETUP.md))
   - Challenges 1-4 can run with 1 account; only Challenge 5 requires 2
-- [Docker](https://docs.docker.com/get-docker/) (for non-cloud challenges)
 - AWS CLI profiles configured as:
   - `hivectf-account-1-admin` (Account 1)
   - `hivectf-account-2-admin` (Account 2)
@@ -106,47 +102,11 @@ terraform apply -var 'flag=HiveCTF{your_custom_flag}'
 # flag = "HiveCTF{your_custom_flag}"
 ```
 
-See [docs/CHALLENGE_GUIDE.md](docs/CHALLENGE_GUIDE.md) for the variable name used by each challenge and instructions for non-cloud challenge flags.
+See [docs/CHALLENGE_GUIDE.md](docs/CHALLENGE_GUIDE.md) for the variable name used by each challenge.
 
 ### AWS Profiles
 
 The default profile names are `hivectf-account-1-admin` and `hivectf-account-2-admin`. To use different profile names, override the `aws_profile` variable (or `account1_profile`/`account2_profile` for Challenge 5).
-
-## Non-Cloud Challenge Setup
-
-### Binary Exploitation: WOM
-
-A heap exploitation challenge using libc-2.31 tcache. Runs via Docker + socat on port 1337.
-
-```bash
-cd binexp/wom
-docker build -t hivectf-wom .
-docker run -d -p 1337:1337 --name hivectf-wom hivectf-wom
-```
-
-Players connect with `nc <host> 1337`. Distribute `wom.bin`, `libc.so.6`, and `ld-2.31.so` to participants for local exploit development. Edit `challenge/flag.txt` before building to set the flag.
-
-### Cryptography: The Enigma of Annabelle
-
-An Enigma machine cryptanalysis challenge. Players decrypt traffic on a message board and interact with a bot to retrieve the flag. Runs via Docker on port 9999.
-
-```bash
-cd "cryptography/Biafra IV - The Enigma of Annabelle"
-docker build -t hivectf-enigma .
-docker run -d -p 9999:9999 --name hivectf-enigma hivectf-enigma
-```
-
-Players connect with `nc <host> 9999`. Override the flag at runtime with `-e FLAG="HiveCTF{...}"`.
-
-### Forensics: Slice
-
-A G-code forensics challenge. No server needed -- distribute the file to players:
-
-```
-challenges/forensics/slice/HiveCTF.gcode
-```
-
-Players analyze the 3D printer G-code to extract the flag embedded in the print geometry.
 
 ## Directory Structure
 
@@ -179,20 +139,7 @@ hivectf/
 │   ├── 2-role-call/
 │   ├── 3-bees-knees/
 │   ├── 4-hive-mind/
-│   ├── 5-queens-gambit/
-│   └── forensics/slice/                    # G-code file + analysis scripts
-├── binexp/
-│   └── wom/                                # Binary exploitation challenge
-│       ├── wom.c                           # Vulnerable source
-│       ├── Dockerfile                      # Alpine + socat container
-│       ├── Makefile
-│       └── challenge/                      # Compiled binary, libc, flag
-├── cryptography/
-│   ├── Biafra IV - The Enigma of Annabelle/
-│   │   ├── challenge/                      # Server, bot, chat history
-│   │   ├── Dockerfile                      # Python + supervisord container
-│   │   └── config/                         # supervisord config
-│   └── challenge.txt                       # Player-facing description
+│   └── 5-queens-gambit/
 ├── scripts/                                # Deployment management
 │   ├── deploy-all.sh                       # Deploy all 5 cloud challenges
 │   ├── destroy-all.sh                      # Tear down all cloud challenges
@@ -258,8 +205,6 @@ Contributions are welcome. To add a new cloud challenge:
 3. Use permission boundaries on all challenge IAM identities.
 4. Add the challenge to the array in `scripts/deploy-all.sh`.
 5. Test deployment and destruction in a clean AWS account.
-
-For non-cloud challenges, add a directory under the appropriate category (`binexp/`, `cryptography/`, `challenges/forensics/`) with a Dockerfile and any files to distribute.
 
 ## License
 

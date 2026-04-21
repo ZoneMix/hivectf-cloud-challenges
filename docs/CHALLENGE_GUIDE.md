@@ -10,10 +10,6 @@ This guide is for instructors and CTF organizers. It explains what each challeng
   - [Challenge 3: Bee's Knees](#challenge-3-bees-knees)
   - [Challenge 4: Hive Mind](#challenge-4-hive-mind)
   - [Challenge 5: Queen's Gambit](#challenge-5-queens-gambit)
-- [Non-Cloud Challenges](#non-cloud-challenges)
-  - [Binary Exploitation: Write Only Memory (WOM)](#binary-exploitation-write-only-memory-wom)
-  - [Cryptography: The Enigma of Annabelle](#cryptography-the-enigma-of-annabelle)
-  - [Forensics: Slice](#forensics-slice)
 - [Suggested Progression Order](#suggested-progression-order)
 - [Customizing Flags](#customizing-flags)
 
@@ -154,121 +150,19 @@ All cloud challenges deploy via Terraform and require the AWS profiles described
 
 ---
 
-## Non-Cloud Challenges
-
-These challenges do not use AWS. They run as Docker containers or are distributed as standalone files.
-
-### Binary Exploitation: Write Only Memory (WOM)
-
-| Field | Value |
-|-------|-------|
-| Difficulty | Hard |
-| Category | Binary Exploitation (pwn) |
-
-**What it teaches**: Heap exploitation, tcache poisoning, understanding glibc memory allocator internals (libc-2.31).
-
-**Description**: A C program that emulates a "Write Only Memory" device. Users can allocate, edit, and free memory slots. The program has an off-by-one vulnerability in the edit function (`read` with `sizes[i]+1` bytes), which allows heap metadata corruption.
-
-**Skills tested**:
-- Heap overflow / off-by-one exploitation
-- Tcache poisoning to achieve arbitrary write
-- ASLR bypass using the leaked partial `printf` address ("Auditing Compliance Tag")
-- Overwriting function pointers or GOT entries to gain code execution
-
-**Setup**:
-
-```bash
-cd binexp/wom
-docker build -t hivectf-wom .
-docker run -d -p 1337:1337 --name hivectf-wom hivectf-wom
-```
-
-Players connect with `nc <host> 1337`. The flag is at `/home/ctf/flag.txt` inside the container. Edit `challenge/flag.txt` before building to set a custom flag.
-
-**Binary details**: Compiled with gcc against libc-2.31. The binary is patched to use the bundled `ld-2.31.so` linker and libc. Players are given both the binary and the libc for local exploit development.
-
-**Files distributed to players**: `wom.bin`, `libc.so.6`, `ld-2.31.so`
-
----
-
-### Cryptography: The Enigma of Annabelle
-
-| Field | Value |
-|-------|-------|
-| Difficulty | Medium |
-| Category | Cryptography |
-
-**What it teaches**: Understanding and breaking Enigma machine encryption, protocol analysis, interacting with custom network services.
-
-**Description**: A fictional scenario where adversaries have acquired Enigma machines for encrypted communication. Players connect to a message board service where bots exchange Enigma-encrypted messages. Players must decrypt the traffic and interact with the bots to extract the flag.
-
-**Skills tested**:
-- Understanding Enigma machine parameters (rotors, reflector, ring settings, plugboard)
-- Implementing or using an Enigma cipher with the provided machine settings
-- Protocol analysis (newline-delimited JSON over TCP)
-- Recognizing that the `OPTIONS` command reveals full machine configuration
-- Encrypting a message containing "flag" and posting it as sender "You" to trigger the bot response
-
-**Setup**:
-
-```bash
-cd "cryptography/Biafra IV - The Enigma of Annabelle"
-docker build -t hivectf-enigma .
-docker run -d -p 9999:9999 --name hivectf-enigma hivectf-enigma
-```
-
-Players connect with `nc <host> 9999` (or via a TCP client that speaks newline-delimited JSON). The flag is set via the `FLAG` environment variable in the Dockerfile. Override it at runtime:
-
-```bash
-docker run -d -p 9999:9999 -e FLAG="HiveCTF{your_custom_flag}" --name hivectf-enigma hivectf-enigma
-```
-
-**Architecture**: `supervisord` manages two processes -- a JSON message board server and a bot client. The bot encrypts messages from a script, posts them to the server, and monitors for messages from sender "You". When it detects a decrypted message containing "flag", it responds with the encrypted flag.
-
----
-
-### Forensics: Slice
-
-| Field | Value |
-|-------|-------|
-| Difficulty | Medium |
-| Category | Forensics |
-
-**What it teaches**: 3D printing forensics, G-code analysis, extracting hidden data from non-traditional file formats.
-
-**Description**: Players receive a G-code file (`HiveCTF.gcode`) -- the type of file used by 3D printers to control print head movements. The flag is embedded in the geometry of the 3D print, visible only when the G-code is rendered or analyzed from the right perspective.
-
-**Skills tested**:
-- Understanding G-code format and 3D printing fundamentals
-- Writing or using a G-code parser/renderer
-- Analyzing layer-by-layer print geometry
-- Identifying text embedded in physical print geometry (potentially tilted or hidden in specific layers)
-
-**Setup**: This challenge requires no server infrastructure. Distribute the G-code file to players:
-
-- **File to distribute**: `challenges/forensics/slice/HiveCTF.gcode`
-- Optionally provide the tilted version: `challenges/forensics/slice/tilted.gcode`
-
-Players need a G-code viewer (such as [gcode.ws](https://gcode.ws), PrusaSlicer's preview, or a custom script) to render and inspect the file. The repository includes Python rendering scripts (`render_gcode.py`, `render_tilted.py`, `untilt.py`) and pre-rendered images in the `renders/` and `renders_tilted/` directories -- these are solution aids, not files to distribute.
-
----
-
 ## Suggested Progression Order
 
 For a multi-hour CTF event, the recommended unlock/progression order is:
 
-| Order | Challenge | Category | Rationale |
-|-------|-----------|----------|-----------|
-| 1 | Bucket List | Cloud | Warm-up: basic web source inspection and S3 enumeration |
-| 2 | Slice | Forensics | No cloud knowledge needed; good variety after cloud |
-| 3 | Role Call | Cloud | Introduces IAM enumeration and role assumption |
-| 4 | The Enigma of Annabelle | Crypto | Non-cloud break; tests different skills |
-| 5 | Bee's Knees | Cloud | Builds on web + cloud; SSTI adds complexity |
-| 6 | WOM | Binary Exploitation | Standalone; hard difficulty keeps experienced players busy |
-| 7 | Hive Mind | Cloud | Multi-step cloud; requires Cognito understanding |
-| 8 | Queen's Gambit | Cloud | Capstone: cross-account, multi-identity, hardest challenge |
+| Order | Challenge | Rationale |
+|-------|-----------|-----------|
+| 1 | Bucket List | Warm-up: basic web source inspection and S3 enumeration |
+| 2 | Role Call | Introduces IAM enumeration and role assumption |
+| 3 | Bee's Knees | Builds on web + cloud; SSTI adds complexity |
+| 4 | Hive Mind | Multi-step cloud; requires Cognito understanding |
+| 5 | Queen's Gambit | Capstone: cross-account, multi-identity, hardest challenge |
 
-Alternatively, unlock all challenges at once and let teams self-select based on their strengths. The point values (100-500) already guide difficulty expectations.
+Alternatively, unlock all challenges at once and let teams self-select. The point values (100-500) already guide difficulty expectations.
 
 ## Customizing Flags
 
@@ -287,7 +181,7 @@ The variable names differ by challenge:
 | Challenge | Variable Name |
 |-----------|--------------|
 | 1 - Bucket List | `challenge_flag` |
-| 2 - Role Call | Hardcoded in `locals` block in `main.tf` -- edit directly |
+| 2 - Role Call | `challenge_flag` |
 | 3 - Bee's Knees | `flag` |
 | 4 - Hive Mind | `flag` |
 | 5 - Queen's Gambit | `flag` |
@@ -299,8 +193,3 @@ cd terraform/challenge-1-bucket-list
 terraform apply -var 'challenge_flag=HiveCTF{my_custom_flag}'
 ```
 
-### Non-cloud challenge flags
-
-- **WOM**: Edit `binexp/wom/challenge/flag.txt` before building the Docker image.
-- **Enigma**: Set the `FLAG` environment variable when running the Docker container (or edit the `ENV FLAG` line in the Dockerfile).
-- **Slice**: The flag is embedded in the G-code geometry. Generating a new G-code file with a different flag requires re-slicing a modified 3D model.
