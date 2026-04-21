@@ -196,6 +196,41 @@ HiveCTF deploys real AWS resources that incur charges. Estimated cost is $0.50-5
 
 The authors are not responsible for any AWS charges incurred. Set up billing alerts before deploying.
 
+## Further Learning
+
+### Vulnerable-by-Design Labs
+
+| Resource | Description |
+|----------|-------------|
+| [CloudGoat](https://github.com/RhinoSecurityLabs/cloudgoat) | Rhino Security's "vulnerable by design" AWS deployment tool. Scenario-based challenges covering IAM, Lambda, EC2, S3, and privilege escalation paths. |
+| [flAWS](http://flaws.cloud) | Progressive AWS security challenge teaching S3 misconfigs, metadata abuse, and IAM mistakes through a series of levels. |
+| [flAWS2](http://flaws2.cloud) | Sequel to flAWS with attacker and defender tracks covering container credentials, ECR, and more. |
+| [AWSGoat](https://github.com/ine-labs/AWSGoat) | INE's vulnerable AWS infrastructure with multiple attack paths across web apps and cloud misconfigurations. |
+| [EKSGoat](https://github.com/madhuakula/kubernetes-goat) | Kubernetes Goat -- vulnerable-by-design K8s cluster for learning container and EKS security. |
+| [IAM Vulnerable](https://github.com/BishopFox/iam-vulnerable) | Bishop Fox's Terraform-deployed AWS environment with 31 IAM privilege escalation paths. |
+| [Sadcloud](https://github.com/nccgroup/sadcloud) | NCC Group's Terraform tool for spinning up insecure AWS resources to test detection tooling. |
+| [Cicdgoat](https://github.com/cider-security-research/cicdgoat) | Deliberately vulnerable CI/CD environment for learning pipeline security. |
+
+### Reference and Cheat Sheets
+
+| Resource | Description |
+|----------|-------------|
+| [HackTricks Cloud](https://cloud.hacktricks.xyz) | Comprehensive cloud pentesting wiki covering AWS, Azure, GCP -- enumeration, privilege escalation, persistence, and lateral movement techniques. |
+| [Hacking The Cloud](https://hackingthe.cloud) | Community-sourced encyclopedia of cloud attack techniques, organized by service and tactic. |
+| [AWS Security Maturity Roadmap](https://summitroute.com/blog/2020/05/21/aws_security_maturity_roadmap/) | Scott Piper's roadmap for hardening AWS accounts from zero to mature security posture. |
+| [Stratus Red Team](https://github.com/DataDog/stratus-red-team) | Datadog's tool for emulating adversary techniques against cloud environments. Maps to MITRE ATT&CK Cloud. Useful for purple team exercises and testing detections. |
+| [Pacu](https://github.com/RhinoSecurityLabs/pacu) | Rhino Security's open-source AWS exploitation framework. Modular post-exploitation tool for assessing AWS account security. |
+| [WeirdAAL](https://github.com/carnal0wnage/weirdAAL) | AWS Attack Library -- collection of scripts for AWS reconnaissance, enumeration, and exploitation. |
+| [AWS Well-Architected Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html) | AWS's own security best practices framework. Essential reading for understanding what the challenges are breaking. |
+
+### Certifications and Training
+
+| Resource | Description |
+|----------|-------------|
+| [AWS Security Specialty (SCS-C02)](https://aws.amazon.com/certification/certified-security-specialty/) | AWS's official security certification. Good foundation for understanding the services used in these challenges. |
+| [SANS SEC510: Cloud Security Controls and Mitigations](https://www.sans.org/cyber-security-courses/cloud-security-controls-mitigations/) | SANS course on cloud security architecture with hands-on AWS labs. |
+| [PentesterLab](https://pentesterlab.com) | Progressive web and cloud security exercises with structured learning paths. |
+
 ## Contributing
 
 Contributions are welcome. To add a new cloud challenge:
