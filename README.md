@@ -229,6 +229,7 @@ The authors are not responsible for any AWS charges incurred. Set up billing ale
 |----------|-------------|
 | [AWS Security Specialty (SCS-C02)](https://aws.amazon.com/certification/certified-security-specialty/) | AWS's official security certification. Good foundation for understanding the services used in these challenges. |
 | [SANS SEC510: Cloud Security Controls and Mitigations](https://www.sans.org/cyber-security-courses/cloud-security-controls-mitigations/) | SANS course on cloud security architecture with hands-on AWS labs. |
+| [SANS SEC588: Cloud Penetration Testing](https://www.sans.org/cyber-security-courses/cloud-penetration-testing/) | SANS course focused on attacking AWS, Azure, and GCP environments. Covers cloud reconnaissance, exploitation, lateral movement, and post-exploitation with hands-on labs. |
 | [PentesterLab](https://pentesterlab.com) | Progressive web and cloud security exercises with structured learning paths. |
 
 ## Contributing
