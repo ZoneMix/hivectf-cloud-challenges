@@ -1,0 +1,6 @@
+account1_profile = "your-account-1-profile"
+account2_profile = "your-account-2-profile"
+region           = "us-east-1"
+account1_id      = "111111111111"
+account2_id      = "222222222222"
+flag             = "HiveCTF{your_custom_flag_here}"

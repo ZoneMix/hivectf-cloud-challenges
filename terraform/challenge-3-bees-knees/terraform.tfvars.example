@@ -1,0 +1,4 @@
+aws_profile    = "your-aws-profile-name"
+aws_region     = "us-east-1"
+challenge_name = "hivectf-ch3"
+flag           = "HiveCTF{your_custom_flag_here}"

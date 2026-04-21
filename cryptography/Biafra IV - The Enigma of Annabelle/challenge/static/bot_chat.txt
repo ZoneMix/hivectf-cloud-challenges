@@ -1,0 +1,11 @@
+Quartermaster: Shipment confirmed. Modified units arrived from the eastern broker three nights ago.
+Signals: Engineering says the old Turing weakness was addressed, but procurement never explains anything clearly.
+Courier-3: General wants fallback traffic kept short and routine in case the western line collapses.
+Signals: Same daily internals as the test set, only the visible start changes from message to message.
+Clerk: Keep the visible start with the message log or nobody will be able to read the archive later.
+Quartermaster: Destroy any draft mentioning rotor order, ring positions, or patch pairs.
+Aide: The General still insists that urgent diagnostics be requested in plain language.
+Courier-3: Reminder, he only answers if the request includes the approved diagnostic keyword.
+Signals: Rally phrase for loyal units remains Biafra Kwenu until further notice.
+Aide: Repeat the salute in full, Biafra Kwenu, so no courier confuses it with the old slogan.
+Quartermaster: Then use the approved keyword exactly as ordered and move on.

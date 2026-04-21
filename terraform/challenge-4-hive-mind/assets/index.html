@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveMind Research Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d0d2b 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #e0e0e0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 0 20px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-hex {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f4a623, #e8871e);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .logo-hex::after {
+            content: "\1F41D";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+        }
+
+        .logo-section h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f4a623;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-section p {
+            font-size: 14px;
+            color: #888;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(244, 166, 35, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-card h2 {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #ccc;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #f4a623;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f4a623, #e8871e);
+            border: none;
+            border-radius: 8px;
+            color: #0a0a1a;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-login:hover {
+            opacity: 0.9;
+        }
+
+        .status-bar {
+            margin-top: 16px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .status-bar.error {
+            display: block;
+            background: rgba(231, 76, 60, 0.15);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+
+        .status-bar.info {
+            display: block;
+            background: rgba(52, 152, 219, 0.15);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            color: #3498db;
+        }
+
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .footer a {
+            color: #f4a623;
+            text-decoration: none;
+        }
+
+        .classification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #c0392b;
+            color: #fff;
+            text-align: center;
+            font-size: 11px;
+            padding: 3px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="classification">HiveMind Research - Authorized Personnel Only</div>
+
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-hex"></div>
+            <h1>HiveMind</h1>
+            <p>Research Portal v3.2.1</p>
+        </div>
+
+        <div class="login-card">
+            <h2>Researcher Authentication</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="researcher@hivemind.io" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-login">Access Portal</button>
+            </form>
+            <div id="statusBar" class="status-bar"></div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 HiveMind Research Corp. | <a href="#">Terms</a> | <a href="#">Privacy</a></p>
+            <p style="margin-top:4px;">System ID: HMRP-${cognito_region}-${pool_suffix}</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // HiveMind Research Portal - Authentication Configuration
+        // WARNING: Do not expose these values in production builds
+        // ============================================================
+
+        const COGNITO_USER_POOL_ID = "${cognito_user_pool_id}";
+        const COGNITO_CLIENT_ID = "${cognito_client_id}";
+        const COGNITO_IDENTITY_POOL_ID = "${cognito_identity_pool_id}";
+        const COGNITO_REGION = "${cognito_region}";
+
+        // Auth endpoint constructed from pool config
+        const AUTH_ENDPOINT = "https://cognito-idp." + COGNITO_REGION + ".amazonaws.com";
+
+        // Identity pool federation provider
+        const IDP_PROVIDER = "cognito-idp." + COGNITO_REGION + ".amazonaws.com/" + COGNITO_USER_POOL_ID;
+
+        // ============================================================
+        // Login handler
+        // ============================================================
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            var statusBar = document.getElementById("statusBar");
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            statusBar.className = "status-bar info";
+            statusBar.textContent = "Authenticating with Cognito backend...";
+            statusBar.style.display = "block";
+
+            // Simulate authentication delay
+            // In the real implementation, this would call Cognito InitiateAuth
+            setTimeout(function() {
+                statusBar.className = "status-bar error";
+                statusBar.textContent = "Authentication service unavailable. Please use the CLI interface or contact your administrator.";
+            }, 2000);
+        });
+
+        // Debug logging for development - TODO: remove before production
+        if (window.location.search.indexOf("debug=true") !== -1) {
+            console.log("[HiveMind Debug] Pool:", COGNITO_USER_POOL_ID);
+            console.log("[HiveMind Debug] Client:", COGNITO_CLIENT_ID);
+            console.log("[HiveMind Debug] Identity Pool:", COGNITO_IDENTITY_POOL_ID);
+            console.log("[HiveMind Debug] Region:", COGNITO_REGION);
+            console.log("[HiveMind Debug] Provider:", IDP_PROVIDER);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+===============================================================
+         OPERATION QUEEN'S GAMBIT - CLASSIFIED BRIEFING
+              CLEARANCE: SCOUT-LEVEL / EYES ONLY
+===============================================================
+
+Agent,
+
+You have been selected for Operation Queen's Gambit, the most
+ambitious intelligence-gathering mission in hive history. Read
+this briefing carefully. Every detail matters.
+
+BACKGROUND
+----------
+For months, our signals intelligence division has tracked a
+series of encrypted transmissions originating from a secondary
+hive -- our allied hive across the border. We believe they are
+harboring a high-value asset: the Queen's personal encryption
+keys, which grant access to the most closely guarded secret in
+our network.
+
+The Queen herself orchestrated this arrangement. By splitting
+her secrets across two sovereign hives, she ensured that no
+single compromise could expose the crown jewels. Clever. But
+now we need those keys back, and the retrieval won't be simple.
+
+YOUR MISSION
+------------
+Phase 1: Establish contact with our liaison in the allied hive.
+         Intelligence on this contact has been filed separately
+         in the intel directory. The contact's identity is
+         encoded -- standard protocol for cross-border assets.
+
+Phase 2: Once inside the allied hive, locate the decoding
+         apparatus. It will require authentication. When
+         challenged, present the operational passphrase:
+
+             pollenpath
+
+         This codename was chosen by the Queen herself. It
+         references the ancient routes our foragers used to
+         navigate between hives -- paths known only to those
+         who carried pollen between kingdoms. Guard it well.
+
+Phase 3: The decoder will reveal the location of the Queen's
+         cached credentials. However, accessing them may
+         require additional clearance beyond what your initial
+         liaison cover provides. Observe what roles are
+         available to you. Think laterally.
+
+Phase 4: Once you have retrieved the Queen's credentials,
+         return to home territory. The credentials will grant
+         you access to the Queen's innermost vault, where the
+         final secret awaits.
+
+OPERATIONAL NOTES
+-----------------
+- Trust no one outside the sanctioned chain of contacts.
+- Each identity you assume has strictly limited capabilities.
+  Do not waste time attempting actions beyond your clearance.
+- The allied hive's security is compartmentalized. Even our
+  liaison has only partial access. You may need to discover
+  additional pathways.
+- Document every step. If you are compromised, command needs
+  to know exactly how far you penetrated.
+
+Remember: in chess, the queen is the most powerful piece on
+the board. But even she relies on pawns to open the path
+forward. You are that pawn, Agent. Make your moves count.
+
+Good luck.
+
+-- Hive Command
+===============================================================
+                    END OF BRIEFING
+===============================================================
